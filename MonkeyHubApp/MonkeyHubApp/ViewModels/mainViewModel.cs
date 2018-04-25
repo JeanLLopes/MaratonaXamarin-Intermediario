@@ -1,11 +1,64 @@
-﻿using System.ComponentModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace MonkeyHubApp.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
-        public string Descricao { get; set; }
+        //propfull
+        private string _descricao;
+
+        public string Descricao
+        {
+            get { return _descricao;  }
+            set
+            {
+                //_descricao = value;
+
+                //if (PropertyChanged != null)
+                //{
+                //AQUI NOS ATUALIZAMOS A VIEW USANDO 
+                //A INTERFACE "INotifyPropertyChanged"
+                //AO INVES DE PASSAR O NOME DA PROPRIEDADE EM "Descricao"
+                //VAMOS USAR O NAMEOF nameof(Descricao)
+                //
+                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Descricao)));
+
+                //}
+
+
+                //PARA EVITAR MAIORES ERROS VAMOS USAR UM 
+                //UNICO METODO PARA FAZER A ALTERÃÇÃO DO ITEM
+                //OnPropertyChanged();
+
+                //CHAMAMOS O MÉTODO SetProperty
+                SetProperty(ref _descricao, value);
+            }
+        }
+
+        //propfull
+        private string _nome;
+
+        public string Nome
+        {
+            get { return _nome; }
+            set
+            {
+                SetProperty(ref _descricao, value);
+            }
+        }
+
+        //propfull
+        private int _idade;
+
+        public int Idade
+        {
+            get { return _idade; }
+            set { SetProperty(ref _idade, value); }
+        }
+
+
+
+
 
         public MainViewModel()
         {
@@ -16,18 +69,8 @@ namespace MonkeyHubApp.ViewModels
             Task.Delay(3000).ContinueWith(x =>
             {
                 Descricao = "Meu Texto Mudou";
-
-
-                if (PropertyChanged != null)
-                {
-                    //AQUI NOS ATUALIZAMOS A VIEW USANDO 
-                    //A INTERFACE "INotifyPropertyChanged"
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Descricao"));
-
-                }
             });
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
