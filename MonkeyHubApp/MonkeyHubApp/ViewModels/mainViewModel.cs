@@ -56,19 +56,21 @@ namespace MonkeyHubApp.ViewModels
             set { SetProperty(ref _idade, value); }
         }
 
-
-
-
-
         public MainViewModel()
         {
             Descricao = "Olá Viewmodel";
 
             //PARA NOTIFICAR A VIEW DA ATUALIZAÇÃO
             //DEVEMOS USAR UMA INTERFACE "INotifyPropertyChanged"
-            Task.Delay(3000).ContinueWith(x =>
+            Task.Delay(3000).ContinueWith(async x =>
             {
                 Descricao = "Meu Texto Mudou";
+
+                for (int i = 0; i < 10; i++)
+                {
+                    await Task.Delay(1000);
+                    Descricao = $"Meu Texto mudou {i}";
+                }
             });
         }
 
