@@ -1,15 +1,51 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Input;
+using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Net.Http.Headers;
+using MonkeyHubApp.Models;
+using System.Net.Http;
 
 namespace MonkeyHubApp.ViewModels
 {
     public class MainPage2ViewModel : BaseViewModel
     {
+        private const string BaseUrl = "http://jsonplaceholder.typicode.com/";
+
+        public async Task<List<PostModel>> GetTagsAsync()
+        {
+            try
+            {
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await httpClient.GetAsync($"{BaseUrl}posts").ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    {
+                        return JsonConvert.DeserializeObject<List<PostModel>>(
+                            await new StreamReader(responseStream)
+                                .ReadToEndAsync().ConfigureAwait(false));
+                    }
+                }
+
+                return null;
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }        }
+
+
+
+
+
         private string _searchTerm;
 
         public string SearchTerm
@@ -27,7 +63,7 @@ namespace MonkeyHubApp.ViewModels
         }
 
         //AQUI CRIAMOS UMA LISTA
-        public ObservableCollection<string> Resultados { get; } = new ObservableCollection<string>();
+        public ObservableCollection<PostModel> Resultados { get; } = new ObservableCollection<PostModel>();
 
 
         public MainPage2ViewModel()
@@ -70,9 +106,19 @@ namespace MonkeyHubApp.ViewModels
 
             if (result)
             {
-                Resultados.Add(SearchTerm);
+                //Resultados.Add(SearchTerm);
                 await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em SIM", "OK");
+
+                var resultAPI = await GetTagsAsync();
+                if (resultAPI != null)
+                {
+                    foreach (var item in resultAPI)
+                    {
+                        Resultados.Add(item);
+                    }
+                }
                 
+
             }
             else
             {
