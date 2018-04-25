@@ -2,7 +2,7 @@
 
 namespace MonkeyHubApp.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public class MainPageViewModel : BaseViewModel
     {
         //propfull
         private string _descricao;
@@ -56,7 +56,7 @@ namespace MonkeyHubApp.ViewModels
             set { SetProperty(ref _idade, value); }
         }
 
-        public MainViewModel()
+        public MainPageViewModel()
         {
             Descricao = "Olá Viewmodel";
 

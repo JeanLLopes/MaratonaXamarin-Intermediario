@@ -15,7 +15,7 @@ namespace MonkeyHubApp
 			InitializeComponent();
 
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA
-            BindingContext = new MainViewModel();
+            BindingContext = new MainPageViewModel();
 		}
 	}
 }
