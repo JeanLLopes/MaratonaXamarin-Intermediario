@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using System.Net.Http.Headers;
 using MonkeyHubApp.Models;
 using System.Net.Http;
+using System;
 
 namespace MonkeyHubApp.ViewModels
 {
@@ -72,7 +73,11 @@ namespace MonkeyHubApp.ViewModels
 
             //AQUI NOS COLOCAMOS ALGUMS VALORES EM NOSSO LISTA
             //Resultados = new ObservableCollection<string>(new[] { "ABC", "BCD" } );
+
+            AboutCommand = new Command(ExecuteAboutCommand);
         }
+
+
 
 
         //PARA USAR OS COMMANDS QUE USAM O VIEW COM A TELA
@@ -81,6 +86,7 @@ namespace MonkeyHubApp.ViewModels
         //DO JEITO QUE ELA FOR CRIADA ELA VAI FICAR
         //COMO UMA PROPRIEDADE readonly
         public Command SearchCommand { get; }
+        public Command AboutCommand { get; }
 
 
         //DETERMINA QUANDO O PODE SER EXECUTADO
@@ -126,5 +132,11 @@ namespace MonkeyHubApp.ViewModels
                 await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em NÃO", "OK");
             }
         }
+
+        private async void ExecuteAboutCommand(object obj)
+        {
+            await PushAsync<AboutViewModel>();
+        }
+
     }
 }

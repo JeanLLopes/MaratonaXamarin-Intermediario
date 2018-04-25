@@ -13,10 +13,14 @@ namespace MonkeyHubApp
 		{
 			InitializeComponent();
 
-			MainPage = new MonkeyHubApp.MainPage2();
-		}
 
-		protected override void OnStart ()
+            //MainPage = new MonkeyHubApp.MainPage2();
+
+            //PARA COLOCAR UMA PARTE DE DEVEMOS INICIAR POR AQUI
+            MainPage = new NavigationPage(new MainPage2());
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MonkeyHubApp.ViewModels
 {
@@ -35,5 +38,28 @@ namespace MonkeyHubApp.ViewModels
             return true;
         }
 
+
+        #region NAVEGAÇÃO
+        public async Task PushAsync<TViewModel>(params object[] args) where TViewModel : BaseViewModel
+        {
+            var viewModelType = typeof(TViewModel);
+
+            var viewModelTypeName = viewModelType.Name;
+            var viewModelTypeLength = "ViewModel".Length;
+            var viewTypeName = $"MonkeyHubApp.{viewModelTypeName.Replace("ViewModel", "Page")}";
+            var viewType = Type.GetType(viewTypeName);
+
+            var page = Activator.CreateInstance(viewType) as Page;
+
+            var viewModel = Activator.CreateInstance(viewModelType, args);
+            if (page != null)
+            {
+                //DEFINI O BINDING CONTEXT CORRETO PARA A PAGE
+                page.BindingContext = viewModel;
+            }
+
+            await Application.Current.MainPage.Navigation.PushAsync(page);
+        } 
+        #endregion
     }
 }

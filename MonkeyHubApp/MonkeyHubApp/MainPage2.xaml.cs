@@ -19,5 +19,25 @@ namespace MonkeyHubApp
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA
             BindingContext = new MainPage2ViewModel();
         }
+
+        //private void Button_OnClicked(object sender, EventArgs e)
+        //{
+        //    Navigation.PushAsync(new MainPage());
+        //}
+        //private void ButtonModal_OnClicked(object sender, EventArgs e)
+        //{
+        //    //Navigation.PushModalAsync(new MainPage());
+
+        //    //PARA NAO DAR CRASH DE NAVEGAÇÃO DENTRO DE MODAL
+        //    //NOS PODE HABILITAR UMA NOVA NAVIGATION DENTRO DO MODAL
+        //    Navigation.PushModalAsync(new NavigationPage(new MainPage2()));
+        //}
+
+        ////VOLTA A NAVEGAÇÃO
+        ////MATANDO A ULTIMA TELA QUE SUBIU
+        //private void ButtonVoltarModal_OnClicked(object sender, EventArgs e)
+        //{
+        //    Navigation?.PopModalAsync();
+        //}
     }
 }
