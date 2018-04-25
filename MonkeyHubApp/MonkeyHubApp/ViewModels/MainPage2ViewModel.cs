@@ -25,6 +25,11 @@ namespace MonkeyHubApp.ViewModels
             }
         }
 
+        public MainPage2ViewModel()
+        {
+            SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
+        }
+
 
         //PARA USAR OS COMMANDS QUE USAM O VIEW COM A TELA
         //SearchCommand VAI SER APENAS GET
@@ -33,10 +38,6 @@ namespace MonkeyHubApp.ViewModels
         //COMO UMA PROPRIEDADE readonly
         public Command SearchCommand { get; }
 
-        public MainPage2ViewModel()
-        {
-            SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
-        }
 
         //DETERMINA QUANDO O PODE SER EXECUTADO
         //COMO SE FOSSE UM HABILITAR E DESABILITAR O BOTAO
@@ -48,10 +49,25 @@ namespace MonkeyHubApp.ViewModels
             return !string.IsNullOrWhiteSpace(SearchTerm); 
         }
 
-        private void ExecuteSeachCommand(object obj)
+        private async void ExecuteSeachCommand(object obj)
         {
             //AQUI FAZEMOS A LOGICA DO BOTÃO
-            Debug.WriteLine($"Clicou no botão {DateTime.Now.ToString()}");
+            //Debug.WriteLine($"Clicou no botão {DateTime.Now.ToString()}");
+
+            //APRESENTANDO O DISPLAY ALERT
+            //await App.Current.MainPage.DisplayAlert("App Name", $"Você pesquisou por {SearchTerm}", "OK");
+
+            //USANDO UMA ARVORE DE DECISÃO
+            bool result = await App.Current.MainPage.DisplayAlert("App Name", $"Você pesquisou por {SearchTerm}", "Sim", "Não");
+
+            if (result)
+            {
+                await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em SIM", "OK");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em NÃO", "OK");
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
         <!--COLOCA UM ELEMENTO EMBAIXO DO OUTRO-->
         <StackLayout>
             <Entry Text="{Binding SearchTerm}"></Entry>
-            <Button Text="Pesquisar" TextColor="White" BackgroundColor="Black" Command="{Binding SearchCommand}"></Button>
+            <Button Text="Pesquisar" Command="{Binding SearchCommand}"></Button>
         </StackLayout>
         
     </ContentPage.Content>
