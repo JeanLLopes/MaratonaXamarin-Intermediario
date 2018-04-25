@@ -1,4 +1,5 @@
-﻿using MonkeyHubApp.ViewModels;
+﻿using MonkeyHubApp.Services;
+using MonkeyHubApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace MonkeyHubApp
 		{
 			InitializeComponent ();
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA
-            BindingContext = new MainPage2ViewModel();
+            BindingContext = new MainPage2ViewModel(new MonkeyHubApiService());
         }
 
         //private void Button_OnClicked(object sender, EventArgs e)

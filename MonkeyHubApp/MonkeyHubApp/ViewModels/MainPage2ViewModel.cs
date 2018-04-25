@@ -8,46 +8,15 @@ using System.Net.Http.Headers;
 using MonkeyHubApp.Models;
 using System.Net.Http;
 using System;
+using MonkeyHubApp.Services;
 
 namespace MonkeyHubApp.ViewModels
 {
     public class MainPage2ViewModel : BaseViewModel
     {
-        private const string BaseUrl = "http://jsonplaceholder.typicode.com/";
-
-        public async Task<List<PostModel>> GetTagsAsync()
-        {
-            try
-            {
-                var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = await httpClient.GetAsync($"{BaseUrl}posts").ConfigureAwait(false);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    {
-                        return JsonConvert.DeserializeObject<List<PostModel>>(
-                            await new StreamReader(responseStream)
-                                .ReadToEndAsync().ConfigureAwait(false));
-                    }
-                }
-
-                return null;
-
-            }
-            catch (System.Exception ex)
-            {
-
-                throw;
-            }        }
-
-
-
-
 
         private string _searchTerm;
+        private readonly IMonkeyHubApiService _iMonkeyHubApiService;
 
         public string SearchTerm
         {
@@ -65,21 +34,8 @@ namespace MonkeyHubApp.ViewModels
 
         //AQUI CRIAMOS UMA LISTA
         public ObservableCollection<PostModel> Resultados { get; } = new ObservableCollection<PostModel>();
-
-
-        public MainPage2ViewModel()
-        {
-            SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
-
-            //AQUI NOS COLOCAMOS ALGUMS VALORES EM NOSSO LISTA
-            //Resultados = new ObservableCollection<string>(new[] { "ABC", "BCD" } );
-
-            AboutCommand = new Command(ExecuteAboutCommand);
-        }
-
-
-
-
+        
+        
         //PARA USAR OS COMMANDS QUE USAM O VIEW COM A TELA
         //SearchCommand VAI SER APENAS GET
         //NÃO SERA set, POIS NÃO TERÃO ALTERAÇÕES NELA
@@ -87,6 +43,21 @@ namespace MonkeyHubApp.ViewModels
         //COMO UMA PROPRIEDADE readonly
         public Command SearchCommand { get; }
         public Command AboutCommand { get; }
+
+
+        public MainPage2ViewModel(IMonkeyHubApiService iMonkeyHubApiService)
+        {
+            SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
+
+            //AQUI NOS COLOCAMOS ALGUMS VALORES EM NOSSO LISTA
+            //Resultados = new ObservableCollection<string>(new[] { "ABC", "BCD" } );
+
+            AboutCommand = new Command(ExecuteAboutCommand);
+
+            _iMonkeyHubApiService = iMonkeyHubApiService; 
+        }
+
+       
 
 
         //DETERMINA QUANDO O PODE SER EXECUTADO
@@ -115,7 +86,7 @@ namespace MonkeyHubApp.ViewModels
                 //Resultados.Add(SearchTerm);
                 await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em SIM", "OK");
 
-                var resultAPI = await GetTagsAsync();
+                var resultAPI = await _iMonkeyHubApiService.GetPostsAsync();
                 if (resultAPI != null)
                 {
                     foreach (var item in resultAPI)

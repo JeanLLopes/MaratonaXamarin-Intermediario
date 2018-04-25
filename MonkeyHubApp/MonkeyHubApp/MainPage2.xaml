@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonkeyHubApp.MainPage2"
              Title="Página Inicial">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        
         
         <!--COLOCA UM ELEMENTO EMBAIXO DO OUTRO-->
         <StackLayout>
-            <Button Text="Pagina Sobre" Command="{Binding AboutCommand}"></Button>
-
             <Button Text="Clique AQUI Modal"></Button>
             
             <Button Text="Voltar Modal"></Button>
