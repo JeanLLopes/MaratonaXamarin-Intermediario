@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
@@ -25,9 +26,16 @@ namespace MonkeyHubApp.ViewModels
             }
         }
 
+        //AQUI CRIAMOS UMA LISTA
+        public ObservableCollection<string> Resultados { get; } = new ObservableCollection<string>();
+
+
         public MainPage2ViewModel()
         {
             SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
+
+            //AQUI NOS COLOCAMOS ALGUMS VALORES EM NOSSO LISTA
+            //Resultados = new ObservableCollection<string>(new[] { "ABC", "BCD" } );
         }
 
 
@@ -58,14 +66,17 @@ namespace MonkeyHubApp.ViewModels
             //await App.Current.MainPage.DisplayAlert("App Name", $"Você pesquisou por {SearchTerm}", "OK");
 
             //USANDO UMA ARVORE DE DECISÃO
-            bool result = await App.Current.MainPage.DisplayAlert("App Name", $"Você pesquisou por {SearchTerm}", "Sim", "Não");
+            bool result = await App.Current.MainPage.DisplayAlert("App Name", $"Deseja guardar o item {SearchTerm} na sua lista", "Sim", "Não");
 
             if (result)
             {
+                Resultados.Add(SearchTerm);
                 await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em SIM", "OK");
+                
             }
             else
             {
+                Resultados.Clear();
                 await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em NÃO", "OK");
             }
         }

@@ -8,6 +8,10 @@
         <StackLayout>
             <Entry Text="{Binding SearchTerm}"></Entry>
             <Button Text="Pesquisar" Command="{Binding SearchCommand}"></Button>
+
+            
+            <!--AQUI PODEMOS FAZER O BINDING DA LISTA-->
+            <ListView ItemsSource="{Binding Resultados}"></ListView>
         </StackLayout>
         
     </ContentPage.Content>
