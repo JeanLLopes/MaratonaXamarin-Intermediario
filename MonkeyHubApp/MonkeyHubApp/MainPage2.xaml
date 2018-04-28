@@ -3,31 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonkeyHubApp.MainPage2"
              Title="Página Inicial">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        
-        
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+        </ContentPage.ToolbarItems>
+        <ContentPage.Content>
+
+
         <!--COLOCA UM ELEMENTO EMBAIXO DO OUTRO-->
         <StackLayout>
-            <Button Text="Clique AQUI Modal"></Button>
-            
-            <Button Text="Voltar Modal"></Button>
-            
+            <!--<Button Text="Clique AQUI Modal"></Button>
+
+            <Button Text="Voltar Modal"></Button>-->
+
             <Entry Text="{Binding SearchTerm}"></Entry>
             <Button Text="Pesquisar" Command="{Binding SearchCommand}"></Button>
 
-            
+
             <!--AQUI PODEMOS FAZER O BINDING DA LISTA-->
-            <ListView ItemsSource="{Binding Resultados}">
+            <ListView ItemsSource="{Binding Resultados}" ItemSelected="ListView_OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Title}" Detail="{Binding Body}"></TextCell>
+                        <TextCell Text="{Binding Name}" Detail="{Binding Email}"></TextCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        
+
     </ContentPage.Content>
 </ContentPage>

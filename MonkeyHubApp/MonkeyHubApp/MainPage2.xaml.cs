@@ -1,10 +1,6 @@
-﻿using MonkeyHubApp.Services;
+﻿using MonkeyHubApp.Models;
+using MonkeyHubApp.Services;
 using MonkeyHubApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,9 +12,15 @@ namespace MonkeyHubApp
 	{
 		public MainPage2 ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA
             BindingContext = new MainPage2ViewModel(new MonkeyHubApiService());
+        }
+
+        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var user = (sender as ListView).SelectedItem as UserModel;
+            (BindingContext as MainPage2ViewModel)?.ShowPostCommand.Execute(user);
         }
 
         //private void Button_OnClicked(object sender, EventArgs e)

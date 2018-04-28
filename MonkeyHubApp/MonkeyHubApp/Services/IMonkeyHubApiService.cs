@@ -1,14 +1,14 @@
 ﻿using MonkeyHubApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MonkeyHubApp.Services
 {
     public interface IMonkeyHubApiService
     {
-        Task<List<PostModel>> GetPostsAsync();
-        Task<PostModel> GetPostByIdAsync(int Id);
+        Task<List<UserModel>> GetUsersAsync();
+        Task<List<PostModel>> GetPostsByUserIdAsync(int idUser);
+        Task<PostModel> GetPostByIdAsync(int IdPost);
+        Task<CommentsModel> GetCommentsByIdAsync(int IdPost);
     }
 }

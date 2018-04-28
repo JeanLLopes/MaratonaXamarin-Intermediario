@@ -16,7 +16,7 @@ namespace MonkeyHubApp.ViewModels
     {
 
         private string _searchTerm;
-        private readonly IMonkeyHubApiService _iMonkeyHubApiService;
+        private readonly IMonkeyHubApiService _monkeyHubApiService;
 
         public string SearchTerm
         {
@@ -33,7 +33,7 @@ namespace MonkeyHubApp.ViewModels
         }
 
         //AQUI CRIAMOS UMA LISTA
-        public ObservableCollection<PostModel> Resultados { get; } = new ObservableCollection<PostModel>();
+        public ObservableCollection<UserModel> Resultados { get; } = new ObservableCollection<UserModel>();
         
         
         //PARA USAR OS COMMANDS QUE USAM O VIEW COM A TELA
@@ -43,9 +43,9 @@ namespace MonkeyHubApp.ViewModels
         //COMO UMA PROPRIEDADE readonly
         public Command SearchCommand { get; }
         public Command AboutCommand { get; }
+        public Command<UserModel> ShowPostCommand { get; }
 
-
-        public MainPage2ViewModel(IMonkeyHubApiService iMonkeyHubApiService)
+        public MainPage2ViewModel(IMonkeyHubApiService monkeyHubApiService)
         {
             SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
 
@@ -53,11 +53,17 @@ namespace MonkeyHubApp.ViewModels
             //Resultados = new ObservableCollection<string>(new[] { "ABC", "BCD" } );
 
             AboutCommand = new Command(ExecuteAboutCommand);
+            ShowPostCommand = new Command<UserModel>(ExecuteShowPostCommand);
 
-            _iMonkeyHubApiService = iMonkeyHubApiService; 
+            _monkeyHubApiService = monkeyHubApiService; 
         }
 
-       
+        private async void ExecuteShowPostCommand(UserModel user)
+        {
+            await PushAsync<PostViewModel>(_monkeyHubApiService, user);
+        }
+
+
 
 
         //DETERMINA QUANDO O PODE SER EXECUTADO
@@ -86,7 +92,7 @@ namespace MonkeyHubApp.ViewModels
                 //Resultados.Add(SearchTerm);
                 await App.Current.MainPage.DisplayAlert("App Name", "Você clicou em SIM", "OK");
 
-                var resultAPI = await _iMonkeyHubApiService.GetPostsAsync();
+                var resultAPI = await _monkeyHubApiService.GetUsersAsync();
                 if (resultAPI != null)
                 {
                     foreach (var item in resultAPI)

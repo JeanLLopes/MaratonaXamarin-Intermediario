@@ -14,14 +14,14 @@ namespace MonkeyHubApp.Services
     {
         private const string BaseUrl = "http://jsonplaceholder.typicode.com/";
 
-        public async Task<List<PostModel>> GetPostsAsync()
+        public async Task<List<PostModel>> GetPostsByUserIdAsync(int idUser)
         {
             try
             {
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await httpClient.GetAsync($"{BaseUrl}posts").ConfigureAwait(false);
+                var response = await httpClient.GetAsync($"{BaseUrl}posts?userId={idUser}").ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -43,9 +43,92 @@ namespace MonkeyHubApp.Services
             }
         }
 
-        public Task<PostModel> GetPostByIdAsync(int Id)
+        public async Task<PostModel> GetPostByIdAsync(int idPost)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await httpClient.GetAsync($"{BaseUrl}posts/{idPost.ToString()}").ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    {
+                        return JsonConvert.DeserializeObject<PostModel>(
+                            await new StreamReader(responseStream)
+                                .ReadToEndAsync().ConfigureAwait(false));
+                    }
+                }
+
+                return null;
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<CommentsModel> GetCommentsByIdAsync(int idPost)
+        {
+            try
+            {
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await httpClient.GetAsync($"{BaseUrl}posts/{idPost.ToString()}/comments").ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    {
+                        return JsonConvert.DeserializeObject<CommentsModel>(
+                            await new StreamReader(responseStream)
+                                .ReadToEndAsync().ConfigureAwait(false));
+                    }
+                }
+
+                return null;
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<List<UserModel>> GetUsersAsync()
+        {
+            try
+            {
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await httpClient.GetAsync($"{BaseUrl}users").ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    {
+                        return JsonConvert.DeserializeObject<List<UserModel>>(
+                            await new StreamReader(responseStream)
+                                .ReadToEndAsync().ConfigureAwait(false));
+                    }
+                }
+
+                return null;
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+
         }
     }
 }
