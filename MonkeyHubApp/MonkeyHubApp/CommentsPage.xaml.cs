@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using MonkeyHubApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,5 +11,14 @@ namespace MonkeyHubApp
 		{
 			InitializeComponent ();
 		}
-	}
+
+        //REESCREVEMSO O METODO DE LOAD DA PAGINA 
+        protected override void OnAppearing()
+        {
+            //CHAMA O METODO "LoadAsync" PARA FAZER O CARREGAMENTO DA TELA
+            (this.BindingContext as CommentsViewModel)?.LoadAsync();
+            base.OnAppearing();
+        }
+
+    }
 }

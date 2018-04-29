@@ -36,16 +36,15 @@ namespace MonkeyHubApp.ViewModels
         }
 
         //propfull
-        private string _nome;
-
-        public string Nome
-        {
-            get { return _nome; }
-            set
-            {
-                SetProperty(ref _descricao, value);
-            }
-        }
+        //private string _nome;
+        //public string Nome
+        //{
+        //    get { return _nome; }
+        //    set
+        //    {
+        //        SetProperty(ref _descricao, value);
+        //    }
+        //}
 
         //propfull
         private int _idade;

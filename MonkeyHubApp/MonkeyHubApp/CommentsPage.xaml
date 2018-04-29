@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MonkeyHubApp.CommentsPage">
+             x:Class="MonkeyHubApp.CommentsPage"
+             Title="Comentarios">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding PostModel.Title}"></Label>
-            <Label Text="{Binding PostModel.Body}"></Label>
+            <ListView ItemsSource="{Binding Comments}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" Detail="{Binding Body}"></TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

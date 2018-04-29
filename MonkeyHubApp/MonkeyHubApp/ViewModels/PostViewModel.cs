@@ -24,9 +24,9 @@ namespace MonkeyHubApp.ViewModels
             ShowPostsCommand = new Command<PostModel>(ExecuteShowPostsCommand);
         }
 
-        private async void ExecuteShowPostsCommand(PostModel obj)
+        private async void ExecuteShowPostsCommand(PostModel postModel)
         {
-            //await PushAsync<>(obj);
+            await PushAsync<CommentsViewModel>(_monkeyHubApiService, postModel);
         }
 
 

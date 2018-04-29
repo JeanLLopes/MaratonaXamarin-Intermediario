@@ -72,7 +72,7 @@ namespace MonkeyHubApp.Services
             }
         }
 
-        public async Task<CommentsModel> GetCommentsByIdAsync(int idPost)
+        public async Task<List<CommentsModel>> GetCommentsByIdAsync(int idPost)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace MonkeyHubApp.Services
                 {
                     using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
-                        return JsonConvert.DeserializeObject<CommentsModel>(
+                        return JsonConvert.DeserializeObject<List<CommentsModel>>(
                             await new StreamReader(responseStream)
                                 .ReadToEndAsync().ConfigureAwait(false));
                     }

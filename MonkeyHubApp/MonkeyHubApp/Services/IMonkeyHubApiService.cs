@@ -9,6 +9,6 @@ namespace MonkeyHubApp.Services
         Task<List<UserModel>> GetUsersAsync();
         Task<List<PostModel>> GetPostsByUserIdAsync(int idUser);
         Task<PostModel> GetPostByIdAsync(int IdPost);
-        Task<CommentsModel> GetCommentsByIdAsync(int IdPost);
+        Task<List<CommentsModel>> GetCommentsByIdAsync(int IdPost);
     }
 }
