@@ -2,12 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MonkeyHubApp"
-             x:Class="MonkeyHubApp.MainPage">
+             x:Class="MonkeyHubApp.MainPage"
+             Title="MainPage">
+    <ContentPage.Content>
 
-    <!--ALTERANDO O MODO DE BINDING Mode=TwoWay-->
-    <!--ALTERANDO DO FORMATO , StringFormat=''-->
-	<Label Text="{Binding Descricao}" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
-
+        <!--ALTERANDO O MODO DE BINDING Mode=TwoWay-->
+        <!--ALTERANDO DO FORMATO , StringFormat=''-->
+        <Label x:Name="LblWelcome"
+            Text="{Binding Descricao}" 
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            TextColor="Azure"/>
+    </ContentPage.Content>
 </ContentPage>

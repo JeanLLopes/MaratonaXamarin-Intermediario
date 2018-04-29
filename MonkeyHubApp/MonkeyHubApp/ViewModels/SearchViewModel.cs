@@ -12,7 +12,7 @@ using MonkeyHubApp.Services;
 
 namespace MonkeyHubApp.ViewModels
 {
-    public class MainPage2ViewModel : BaseViewModel
+    public class SearchViewModel : BaseViewModel
     {
 
         private string _searchTerm;
@@ -45,7 +45,7 @@ namespace MonkeyHubApp.ViewModels
         public Command AboutCommand { get; }
         public Command<UserModel> ShowPostCommand { get; }
 
-        public MainPage2ViewModel(IMonkeyHubApiService monkeyHubApiService)
+        public SearchViewModel(IMonkeyHubApiService monkeyHubApiService)
         {
             SearchCommand = new Command(ExecuteSeachCommand, CanExecuteSearchCommand);
 

@@ -17,7 +17,7 @@ namespace MonkeyHubApp
             //MainPage = new MonkeyHubApp.MainPage2();
 
             //PARA COLOCAR UMA PARTE DE DEVEMOS INICIAR POR AQUI
-            MainPage = new NavigationPage(new MainPage2());
+            MainPage = new NavigationPage(new SearchPage());
         }
 
         protected override void OnStart ()
