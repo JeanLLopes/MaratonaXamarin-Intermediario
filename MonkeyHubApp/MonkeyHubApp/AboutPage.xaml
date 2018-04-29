@@ -7,7 +7,9 @@
         <StackLayout>
             <Label Text="Sobre Page Xamarin"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" 
+                TextColor="{StaticResource ColorBlue}"
+                Font="{StaticResource FontLarge}"   />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

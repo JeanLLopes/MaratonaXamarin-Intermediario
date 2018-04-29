@@ -16,6 +16,11 @@ namespace MonkeyHubApp
 
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA
             BindingContext = new MainPageViewModel();
+
+            BtnNavegar.Clicked += async (sender, e) =>
+            {
+                await Navigation.PushAsync(new SearchPage());
+            };
 		}
 	}
 }

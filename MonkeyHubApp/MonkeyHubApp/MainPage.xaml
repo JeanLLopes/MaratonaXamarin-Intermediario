@@ -3,15 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MonkeyHubApp"
              x:Class="MonkeyHubApp.MainPage"
-             Title="MainPage">
-    <ContentPage.Content>
+             Title="Pagina Principal">
+    
+    <StackLayout>
 
-        <!--ALTERANDO O MODO DE BINDING Mode=TwoWay-->
-        <!--ALTERANDO DO FORMATO , StringFormat=''-->
-        <Label x:Name="LblWelcome"
+        <!--ALTERANDO O MODO DE BINDING Mode=TwoWay
+        ALTERANDO DO FORMATO , StringFormat=''-->
+        <Label 
             Text="{Binding Descricao}" 
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            TextColor="Azure"/>
-    </ContentPage.Content>
+            TextColor="{StaticResource ColorBlue}"
+            Font="{StaticResource FontLarge}" />
+        <Button Text="Excluir" Style="{StaticResource Danger}"></Button>
+        <Button Text="Salvar" Style="{StaticResource Info}"></Button>
+        <Button Text="Navegar Para o APP" x:Name="BtnNavegar"></Button>
+
+    </StackLayout>
+    
+    
 </ContentPage>
