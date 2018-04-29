@@ -36,7 +36,7 @@ namespace MonkeyHubApp.Services
                 return null;
 
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
                 throw;
@@ -65,7 +65,7 @@ namespace MonkeyHubApp.Services
                 return null;
 
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
                 throw;
@@ -94,7 +94,7 @@ namespace MonkeyHubApp.Services
                 return null;
 
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
                 throw;
@@ -123,7 +123,7 @@ namespace MonkeyHubApp.Services
                 return null;
 
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
                 throw;

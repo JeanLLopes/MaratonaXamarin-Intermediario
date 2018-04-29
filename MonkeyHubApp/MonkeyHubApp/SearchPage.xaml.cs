@@ -8,19 +8,20 @@ using Xamarin.Forms.Xaml;
 namespace MonkeyHubApp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainPage2 : ContentPage
+	public partial class SearchPage : ContentPage
 	{
-		public MainPage2 ()
-		{
-			InitializeComponent();
+        public SearchPage()
+        {
+            InitializeComponent();
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA
-            BindingContext = new MainPage2ViewModel(new MonkeyHubApiService());
+            BindingContext = new SearchViewModel(new MonkeyHubApiService());
+
         }
 
         private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var user = (sender as ListView).SelectedItem as UserModel;
-            (BindingContext as MainPage2ViewModel)?.ShowPostCommand.Execute(user);
+            (BindingContext as SearchViewModel)?.ShowPostCommand.Execute(user);
         }
 
         //private void Button_OnClicked(object sender, EventArgs e)
