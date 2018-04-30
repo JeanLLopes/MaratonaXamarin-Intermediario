@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MonkeyHubApp"
              x:Class="MonkeyHubApp.MainPage"
-             Title="Pagina Principal">
-    
-    <StackLayout>
+             Title="Jornalistas">
 
-        <!--ALTERANDO O MODO DE BINDING Mode=TwoWay
-        ALTERANDO DO FORMATO , StringFormat=''-->
+    <!--<StackLayout>
+        ALTERANDO O MODO DE BINDING Mode=TwoWay
+        ALTERANDO DO FORMATO , StringFormat=''
         <Label 
             Text="{Binding Descricao}" 
             VerticalOptions="Center" 
@@ -18,8 +17,18 @@
         <Button Text="Excluir" Style="{StaticResource Danger}"></Button>
         <Button Text="Salvar" Style="{StaticResource Info}"></Button>
         <Button Text="Navegar Para o APP" x:Name="BtnNavegar"></Button>
-
-    </StackLayout>
-    
-    
+    </StackLayout>-->
+    <ListView ItemsSource="{Binding Resultados}" HasUnevenRows="True" x:Name="ListViewJornalistas">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="20">
+                        <Label Text="{Binding Name}" TextColor="Black" Font="Large"></Label>
+                        <Label Text="{Binding Email}" TextColor="Gray" Font="Medium"></Label>
+                        <Label Text="{Binding Website}" TextColor="DarkBlue" Font="Micro"></Label>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
