@@ -14,10 +14,10 @@ namespace MonkeyHubApp
             BindingContext = new MainPageViewModel(new MonkeyHubApiService());
 
             //CLIQUE DO BOTAO DE ITEM SELECIONADO
-            this.ListViewJornalistas.ItemSelected += (sender, e) =>
-             {
-                 ViewModel.ShowPostCommand.Execute(e.SelectedItem);
-             };
+            //this.ListViewJornalistas.ItemSelected += (sender, e) =>
+            // {
+            //     ViewModel.ShowPostCommand.Execute(e.SelectedItem);
+            // };
 
 
             //AQUI NOS LIGAMOS A VIEWMODEL A TELA

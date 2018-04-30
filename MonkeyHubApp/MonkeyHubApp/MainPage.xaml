@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MonkeyHubApp"
              x:Class="MonkeyHubApp.MainPage"
+             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
              Title="Jornalistas">
 
     <!--<StackLayout>
@@ -18,7 +19,10 @@
         <Button Text="Salvar" Style="{StaticResource Info}"></Button>
         <Button Text="Navegar Para o APP" x:Name="BtnNavegar"></Button>
     </StackLayout>-->
-    <ListView ItemsSource="{Binding Resultados}" HasUnevenRows="True" x:Name="ListViewJornalistas">
+    
+    <!--PARA USAR O NOVO CONTROLE CRIADO NO ARQUIVO "MyListView" VOCÊ DEVE 
+    ALTERAR O "LISTVIEW" PARA "controls:MyListView"-->
+    <controls:MyListView ItemsSource="{Binding Resultados}" HasUnevenRows="True" ItemTappedCommand="{Binding ShowPostCommand}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -30,5 +34,5 @@
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
-    </ListView>
+    </controls:MyListView>
 </ContentPage>
