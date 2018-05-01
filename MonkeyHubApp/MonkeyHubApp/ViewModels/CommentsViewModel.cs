@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MonkeyHubApp.ViewModels
 {
@@ -13,6 +14,7 @@ namespace MonkeyHubApp.ViewModels
         private readonly IMonkeyHubApiService _monkeyHubApiService;
         private readonly PostModel _postModel;
         public ObservableCollection<CommentsModel> Comments { get; }
+        public Command AboutCommand { get; }
 
 
         public CommentsViewModel(IMonkeyHubApiService monkeyHubApiService, PostModel postModel)
@@ -20,6 +22,14 @@ namespace MonkeyHubApp.ViewModels
             _postModel = postModel;
             _monkeyHubApiService = monkeyHubApiService;
             Comments = new ObservableCollection<CommentsModel>();
+            AboutCommand = new Command(ExecuteAboutCommand);
+
+        }
+
+        private async void ExecuteAboutCommand(object obj)
+        {
+            await PushAsync<AboutViewModel>();
+
         }
 
         public PostModel PostModel { get; }

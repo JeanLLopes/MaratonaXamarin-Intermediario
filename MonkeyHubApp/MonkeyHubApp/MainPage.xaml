@@ -19,7 +19,12 @@
         <Button Text="Salvar" Style="{StaticResource Info}"></Button>
         <Button Text="Navegar Para o APP" x:Name="BtnNavegar"></Button>
     </StackLayout>-->
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+
     <!--PARA USAR O NOVO CONTROLE CRIADO NO ARQUIVO "MyListView" VOCÊ DEVE 
     ALTERAR O "LISTVIEW" PARA "controls:MyListView"-->
     <controls:MyListView ItemsSource="{Binding Resultados}" HasUnevenRows="True" ItemTappedCommand="{Binding ShowPostCommand}">

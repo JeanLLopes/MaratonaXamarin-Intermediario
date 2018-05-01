@@ -1,5 +1,6 @@
 ﻿using MonkeyHubApp.Models;
 using MonkeyHubApp.Services;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,6 +14,7 @@ namespace MonkeyHubApp.ViewModels
 
         public ObservableCollection<PostModel> Posts { get; }
         public Command<PostModel> ShowPostsCommand { get; set; }
+        public Command AboutCommand { get; }
 
 
         public PostViewModel(IMonkeyHubApiService monkeyHubApiService, UserModel userModel)
@@ -22,6 +24,13 @@ namespace MonkeyHubApp.ViewModels
 
             Posts = new ObservableCollection<PostModel>();
             ShowPostsCommand = new Command<PostModel>(ExecuteShowPostsCommand);
+            AboutCommand = new Command(ExecuteAboutCommand);
+
+        }
+
+        private async void ExecuteAboutCommand(object obj)
+        {
+            await PushAsync<AboutViewModel>();
         }
 
         private async void ExecuteShowPostsCommand(PostModel postModel)

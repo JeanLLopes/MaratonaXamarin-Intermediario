@@ -15,6 +15,11 @@
             </ListView>
         </StackLayout>
     </ContentPage.Content>-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    
     <controls:MyListView ItemsSource="{Binding Comments}" HasUnevenRows="True" >
         <ListView.ItemTemplate>
             <DataTemplate>
