@@ -11,7 +11,7 @@ namespace MonkeyHubApp.ViewModels
         private readonly IMonkeyHubApiService _monkeyHubApiService;
         private readonly UserModel _userModel;
 
-        public ObservableCollection<PostModel> Contents { get; }
+        public ObservableCollection<PostModel> Posts { get; }
         public Command<PostModel> ShowPostsCommand { get; set; }
 
 
@@ -20,7 +20,7 @@ namespace MonkeyHubApp.ViewModels
             _monkeyHubApiService = monkeyHubApiService;
             _userModel = userModel;
 
-            Contents = new ObservableCollection<PostModel>();
+            Posts = new ObservableCollection<PostModel>();
             ShowPostsCommand = new Command<PostModel>(ExecuteShowPostsCommand);
         }
 
@@ -35,10 +35,11 @@ namespace MonkeyHubApp.ViewModels
         {
             var contents = await _monkeyHubApiService.GetPostsByUserIdAsync(_userModel.Id);
 
-            Contents.Clear();
+            Posts.Clear();
             foreach (var item in contents)
             {
-                Contents.Add(item);
+                item.Title = item.Title.ToUpper();
+                Posts.Add(item);
             }
         }
     }
