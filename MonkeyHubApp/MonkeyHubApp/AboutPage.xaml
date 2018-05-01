@@ -3,11 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonkeyHubApp.AboutPage"
              Title="Sobre">
-    <ContentPage.Content>
+    <!--<ContentPage.Content>
         <StackLayout>
             <Label Text="Sobre Page Xamarin"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" 
+                TextColor="{StaticResource ColorBlue}"
+                Font="{StaticResource FontLarge}"   />
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
+    <TableView Intent="Menu">
+        <TableRoot>
+            <TableSection Title="Versão">
+                <TextCell Text="Versao 1.0"></TextCell>
+            </TableSection>
+            <TableSection Title="Termos de Uso">
+                <SwitchCell Text="Aceito os termos de uso"></SwitchCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
 </ContentPage>

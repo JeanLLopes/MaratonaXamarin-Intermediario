@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonkeyHubApp.CommentsPage"
+             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
              Title="Comentarios">
-    <ContentPage.Content>
+    <!--<ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding Comments}" >
                 <ListView.ItemTemplate>
@@ -13,5 +14,24 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    
+    <controls:MyListView ItemsSource="{Binding Comments}" HasUnevenRows="True" >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="20">
+                        <Label Text="{Binding Name}" TextColor="Black" Font="Large"></Label>
+                        <Label Text="{Binding Body}" TextColor="Gray" Font="Medium"></Label>
+                        <Label Text="{Binding Email}" TextColor="DarkBlue" Font="Micro"></Label>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </controls:MyListView>
+
 </ContentPage>

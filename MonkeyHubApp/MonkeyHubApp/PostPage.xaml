@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonkeyHubApp.PostPage"
+             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
              Title="Postagens">
-    <ContentPage.Content>
+    <!--<ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding Contents}" ItemSelected="ListView_OnItemSelected">
                 <ListView.ItemTemplate>
@@ -13,5 +14,24 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+
+    <controls:MyListView  ItemsSource="{Binding Posts}" HasUnevenRows="True" ItemTappedCommand="{Binding ShowPostsCommand}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical">
+                        <Label Margin="20, 20,20,0" Text="{Binding Title}" Font="Large" TextColor="Black"></Label>
+                        <Label Margin="20,10" Text="{Binding Body}" Font="Medium" TextColor="Gray"></Label> 
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </controls:MyListView>
+    
 </ContentPage>

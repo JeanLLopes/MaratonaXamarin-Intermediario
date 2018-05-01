@@ -3,15 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MonkeyHubApp"
              x:Class="MonkeyHubApp.MainPage"
-             Title="MainPage">
-    <ContentPage.Content>
+             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
+             Title="Jornalistas">
 
-        <!--ALTERANDO O MODO DE BINDING Mode=TwoWay-->
-        <!--ALTERANDO DO FORMATO , StringFormat=''-->
-        <Label x:Name="LblWelcome"
+    <!--<StackLayout>
+        ALTERANDO O MODO DE BINDING Mode=TwoWay
+        ALTERANDO DO FORMATO , StringFormat=''
+        <Label 
             Text="{Binding Descricao}" 
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            TextColor="Azure"/>
-    </ContentPage.Content>
+            TextColor="{StaticResource ColorBlue}"
+            Font="{StaticResource FontLarge}" />
+        <Button Text="Excluir" Style="{StaticResource Danger}"></Button>
+        <Button Text="Salvar" Style="{StaticResource Info}"></Button>
+        <Button Text="Navegar Para o APP" x:Name="BtnNavegar"></Button>
+    </StackLayout>-->
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding AboutCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+
+    <!--PARA USAR O NOVO CONTROLE CRIADO NO ARQUIVO "MyListView" VOCÊ DEVE 
+    ALTERAR O "LISTVIEW" PARA "controls:MyListView"-->
+    <controls:MyListView ItemsSource="{Binding Resultados}" HasUnevenRows="True" ItemTappedCommand="{Binding ShowPostCommand}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="20">
+                        <Label Text="{Binding Name}" TextColor="Black" Font="Large"></Label>
+                        <Label Text="{Binding Email}" TextColor="Gray" Font="Medium"></Label>
+                        <Label Text="{Binding Website}" TextColor="DarkBlue" Font="Micro"></Label>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </controls:MyListView>
 </ContentPage>

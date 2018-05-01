@@ -30,5 +30,7 @@ namespace MonkeyHubApp
             var content = (sender as ListView).SelectedItem as PostModel;
             (BindingContext as PostViewModel)?.ShowPostsCommand.Execute(content);
         }
+
+
     }
 }
